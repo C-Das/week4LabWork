@@ -12,9 +12,44 @@ function deleteRow() {
     this.parentElement.parentElement.remove();
 }
 
-var addButton = document.getElementById("addButton");
+document.getElementById("addButton").addEventListener("click", doValidations);
 
-addButton.addEventListener("click",insertRow);
+function doValidations() {
+    var inputsArray = document.getElementsByTagName("input");
+    var elementText;
+    var validationCheck=0;
+
+    for(var i = 0; i < inputsArray.length; i++) {
+        if(inputsArray[i].value === "") {
+          switch(i) {
+            case 0:
+              elementText = "first";
+              validationCheck = 1;
+              break;
+            case 1:
+              elementText = "second";
+              validationCheck = 1;
+              break;
+            case 2:
+              elementText = "third";
+              validationCheck = 1;
+              break;
+          }
+          inputsArray[i].setAttribute("style", "border: red 1px solid;");
+          alert("You left the " + elementText + " input empty!");
+          break;
+        }
+
+        if (i < inputsArray.length - 1 && inputsArray[i].value === inputsArray[i + 1].value) {
+            alert("You have duplicate values. Please enter unique values !!");
+            validationCheck = 1;
+        }
+    }
+
+    if (validationCheck === 0) {
+        insertRow (); // Calls the insertRow function if none of the values are null
+    }
+}
 
 function insertRow () {
     console.log ("We are going to add a row to the table"); 
@@ -35,37 +70,6 @@ function insertRow () {
     var cell3Val = inputs[2].value;
     console.log ("The entered values are :" +cell1Val +"and" +cell2Val+ "and" +cell3Val);
 
-    document.getElementById("addButton").addEventListener("click", doCheckNullString);
-
-    function doCheckNullString() {
-      var inputsArray = document.getElementsByTagName("input");
-      var elementText;
-      var nullCheck=0;
-
-      for(var i = 0; i < inputsArray.length; i++) {
-        if(inputsArray[i].value === "") {
-          switch(i) {
-            case 0:
-              elementText = "first";
-              nullCheck=1;
-              break;
-            case 1:
-              elementText = "second";
-              nullCheck=1;
-              break;
-            case 2:
-              elementText = "third";
-              nullCheck=1;
-              break;
-          }
-          inputsArray[i].setAttribute("style", "border: red 1px solid;");
-          alert("You left the " + elementText + " input empty!");
-          break;
-        }
-      }
-      return nullCheck;
-    }
-
     // Add some text to the new cells:
     cell1.innerHTML = inputs[0].value;    
     cell2.innerHTML = inputs[1].value;
@@ -79,7 +83,7 @@ function randomDelete() {
     var randomValue = Math.floor((Math.random() * 100) + 5)*1000;
     //console.log (randomValue);
     setTimeout(function() {
-        console.log ("I am inside setTimeout");
+        //console.log ("I am inside setTimeout");
         firstRowForDelete = document.getElementById("firstRow");
         firstRowForDelete.remove();
     }, randomValue);
