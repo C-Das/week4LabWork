@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Week3 Lab3 Student Page</title>
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" integrity="sha512-dTfge/zgoMYpP7QbHy4gWMEGsbsdZeCXz7irItjcC3sPUFtf0kuFbDz/ixG7ArTxmDjLXDmezHubeNikyKGVyQ==" crossorigin="anonymous">
+</head>
+<body onload="randomDelete()">
+  <h1> Student Home Page</h1>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6">
+        <table class="table table-striped" id="studentTable">
+            <tr>
+              <th>First Name</th>
+              <th>Last Name</th>
+              <th>E-mail Addess</th>
+              <th>"X" Button</th>
+            </tr>
+            <tr id="firstRow">
+              <td>Mark</td>
+              <td>Otto</td>
+              <td>@mdo</td>
+              <td>
+                <button type="button" class="btn btn-default"> X </button>
+              </td>
+            </tr>            
+            <tr id="secondRow">
+              <td>Jacob</td>
+              <td>Thompton</td>
+              <td>@twitter</td>
+              <td>
+                <button type="button" class="btn btn-default"> X </button>
+              </td>             
+            </tr>
+            <tr id="thirdRow">
+              <td>Chinmay</td>
+              <td>Das</td>
+              <td>@gmail</td>
+              <td>
+                 <button type="button" class="btn btn-default"> X </button>
+              </td>
+            </tr>
+            <tr id="addRow">
+              <td id="tdFist">
+                <input type="text" class="form-control" id="fName" placeholder="First Name">
+              </td>
+              <td id="tdSecond">
+                <input type="text" class="form-control" id="lName" placeholder="Last Name">
+              </td>
+              <td id="tdThird">
+                <input type="text" class="form-control" id="eMail" placeholder="abc@xyz">
+              </td>
+              <td>
+                <button type="button" class="btn btn-primary" id="addButton"> + </button>
+              </td>
+        </table>
+      </div>
+    </div>
+  </div>
+  <script type="text/javascript" src="js/w4labstudents.js"></script>
+</body>
+</html>
