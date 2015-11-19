@@ -5,11 +5,12 @@ var deleteButtons = document.getElementsByClassName("btn-default");
 /* Add event listener on all buttons */
 
 for (i=0; i < deleteButtons.length; i++) {
-    deleteButtons[i].addEventListener("click",deleteRow)
+    deleteButtons[i].addEventListener("click",deleteRow);
 }
 
 function deleteRow() {
-    this.parentElement.parentElement.remove();
+  index = this.parentElement.parentElement.rowIndex;
+  document.getElementById("studentTable").deleteRow(index);
 }
 
 document.getElementById("addButton").addEventListener("click", doValidations);
@@ -40,15 +41,40 @@ function doValidations() {
           break;
         }
 
-        if (i < inputsArray.length - 1 && inputsArray[i].value === inputsArray[i + 1].value) {
-            alert("You have duplicate values. Please enter unique values !!");
-            validationCheck = 1;
-        }
+          for (var j = 1; j < inputsArray.length ; j++) {
+            //console.log ("value of i " +i +"value of j "+j);
+            if (inputsArray[i].value === inputsArray[j].value) {
+              switch (i) {
+                case 0 :
+                  switch (j) {
+                    case 1 :
+                      alert("You First & Second Values are duplicate. Please enter unique values!!");
+                      validationCheck = 1;
+                      break; //Duplicate values found, so break from inner loop
+                    case 2 :
+                      alert("You First & Third Values are duplicate. Please enter unique values!!");
+                      validationCheck = 1;
+                      break; //Duplicate values found, so break from inner loop 
+                  } break;
+                case 1 :
+                  switch (j) {
+                    case 2 :
+                      alert("You Second & Third Values are duplicate. Please enter unique values!!");
+                      validationCheck = 1;
+                      break; //Duplicate values found, so break from inner loop 
+                  } break;
+              }
+            }
+          } 
+
+        if (validationCheck === 1) {
+        break; // brake from outer loop as there are duplicate values
+      } 
     }
 
     if (validationCheck === 0) {
-        insertRow (); // Calls the insertRow function if none of the values are null
-    }
+        insertRow (); // Calls the insertRow function if none of the values are null or duplicate
+    } 
 }
 
 function insertRow () {
@@ -65,16 +91,13 @@ function insertRow () {
     var cell1 = rowInsert.insertCell(0);
     var cell2 = rowInsert.insertCell(1);
     var cell3 = rowInsert.insertCell(2);
-    var cell1Val = inputs[0].value;    
-    var cell2Val = inputs[1].value;
-    var cell3Val = inputs[2].value;
-    console.log ("The entered values are :" +cell1Val +"and" +cell2Val+ "and" +cell3Val);
+    var cell4 = rowInsert.insertCell(3);
 
     // Add some text to the new cells:
     cell1.innerHTML = inputs[0].value;    
     cell2.innerHTML = inputs[1].value;
     cell3.innerHTML = inputs[2].value;
-    
+    cell4.innerHTML = cell4.innerHTML + "<button type='button' class='btn btn-default' onclick=\"deleteRow()\"> X </button>"
 }
 
 //Deletes first row in random between 5 to 10 seconds 
