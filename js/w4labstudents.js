@@ -93,11 +93,18 @@ function insertRow () {
     var cell3 = rowInsert.insertCell(2);
     var cell4 = rowInsert.insertCell(3);
 
-    // Add some text to the new cells:
+    //create delete button
+    
+    var newDeleteButton = document.createElement("button");
+    newDeleteButton.setAttribute("class", "btn btn-default");
+    newDeleteButton.appendChild(document.createTextNode("X"));
+    
+    // Add values to the new cells:
     cell1.innerHTML = inputs[0].value;    
     cell2.innerHTML = inputs[1].value;
     cell3.innerHTML = inputs[2].value;
-    cell4.innerHTML = cell4.innerHTML + "<button type='button' class='btn btn-default' onclick=\"deleteRow()\"> X </button>"
+    cell4.appendChild(newDeleteButton);
+    newDeleteButton.addEventListener("click", deleteRow);
 }
 
 //Deletes first row in random between 5 to 10 seconds 
